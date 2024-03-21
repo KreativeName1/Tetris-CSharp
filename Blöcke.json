@@ -1,0 +1,50 @@
+[
+	{
+		"Farbe": "Blue",
+		"Layout": [
+			[ 1, 0, 0 ],
+			[ 1, 1, 1 ]
+		]
+	},
+	{
+		"Farbe": "Yellow",
+		"Layout": [
+			[ 0, 0, 1 ],
+			[ 1, 1, 1 ]
+		]
+	},
+	{
+		"Farbe": "Green",
+		"Layout": [
+			[ 1, 1 ],
+			[ 1, 1 ]
+		]
+	},
+	{
+		"Farbe": "Cyan",
+		"Layout": [
+			[ 1, 1, 0 ],
+			[ 0, 1, 1 ]
+		]
+	},
+	{
+		"Farbe": "Red",
+		"Layout": [
+			[ 0, 1, 0 ],
+			[ 1, 1, 1 ]
+		]
+	},
+	{
+		"Farbe": "White",
+		"Layout": [
+			[ 0, 1, 1 ],
+			[ 1, 1, 0 ]
+		]
+	},
+	{
+		"Farbe": "Magenta",
+		"Layout": [
+			[ 1, 1, 1, 1 ]
+		]
+	}
+]
