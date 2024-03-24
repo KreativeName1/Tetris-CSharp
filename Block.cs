@@ -160,7 +160,7 @@ namespace Tetris
 		public static List<Block> Laden()
 		{
 			List<Block> liste = new();
-			liste = JsonConvert.DeserializeObject<List<Block>>(File.ReadAllText("../../../Blöcke.json"), new JsonSerializerSettings
+			liste = JsonConvert.DeserializeObject<List<Block>>(File.ReadAllText("Blöcke.json"), new JsonSerializerSettings
 			{
 				Converters = { new ConsoleColorConverter() }
 			});
