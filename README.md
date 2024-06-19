@@ -1,11 +1,25 @@
 # Tetris-CSharp
-Tetris in der C# Console
+## Description
+A Tetris clone written in C# Console.
 
-Mein Zweites Spiel, dass ich gemacht habe
+## Features
+- Music and sound effects
+- Score and level system
+- Different block with different colors
+- Display of next block
+- Start Menu and Game Over screen (animated)
+- Music and Level selection in the start menu
 
-Die Zeilenlöschung macht noch Probleme, Die Steuerung ist noch nicht perfect und der Code ist vielleicht etwas chaotisch, aber funtioniert
+## Controls
 
+## Missing Features
+- Highscore system
+- Pause menu
 
+## Known Issues
+- The movement is not like the original Tetris game
+- When lines are cleared, the blocks above are not falling down properly
+- In the music selection, the music could be overlapping when the player is selecting a music track
 ## Screenshots
 ![grafik](https://github.com/KreativeName1/Tetris-CSharp/assets/115576847/d6599848-8997-47e5-9d78-0577feffa113)
 ![grafik](https://github.com/KreativeName1/Tetris-CSharp/assets/115576847/0e8b401a-7a48-45ce-a847-3452e3050c72)
