@@ -148,7 +148,7 @@ namespace Tetris
 
 		public static List<Block> InitializeBlocks()
 		{
-			List<Block>? blockList = new();
+			List<Block> blockList;
       if (!File.Exists("blocks.json")) throw new Exception("blocks.json not found! Please make sure the file is in the same directory as the executable. If Missing, you can find it in the GitHub Repository.");
 			blockList = JsonConvert.DeserializeObject<List<Block>>(File.ReadAllText("blocks.json"), new JsonSerializerSettings
 			{

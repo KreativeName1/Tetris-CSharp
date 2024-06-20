@@ -206,6 +206,7 @@ namespace Tetris
 
     private Block GenerateBlock()
     {
+      Trace.WriteLine("Block generiert");
       Block block = Block.Blöcke[randomizer.Next(0, Block.Blöcke.Count)];
       return new Block(boardWidth / 2, 0, block.Color, block.Pattern.Select(x => x.ToArray()).ToArray());
     }

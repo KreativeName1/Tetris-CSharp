@@ -1,0 +1,50 @@
+[
+	{
+		"Color": "Blue",
+		"Pattern": [
+			[ 1, 0, 0 ],
+			[ 1, 1, 1 ]
+		]
+	},
+	{
+		"Color": "Yellow",
+		"Pattern": [
+			[ 0, 0, 1 ],
+			[ 1, 1, 1 ]
+		]
+	},
+	{
+		"Color": "Green",
+		"Pattern": [
+			[ 1, 1 ],
+			[ 1, 1 ]
+		]
+	},
+	{
+		"Color": "Cyan",
+		"Pattern": [
+			[ 1, 1, 0 ],
+			[ 0, 1, 1 ]
+		]
+	},
+	{
+		"Color": "Red",
+		"Pattern": [
+			[ 0, 1, 0 ],
+			[ 1, 1, 1 ]
+		]
+	},
+	{
+		"Color": "White",
+		"Pattern": [
+			[ 0, 1, 1 ],
+			[ 1, 1, 0 ]
+		]
+	},
+	{
+		"Color": "Magenta",
+		"Pattern": [
+			[ 1, 1, 1, 1 ]
+		]
+	}
+]

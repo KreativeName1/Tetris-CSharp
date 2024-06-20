@@ -9,6 +9,12 @@ namespace Tetris
   {
     private static void Main(string[] args)
     {
+      try {
+      Block.InitializeBlocks();
+      }
+      catch (Exception e) {
+        Console.WriteLine(e.Message);
+      }
       IPlatformAudioFactory factory;
       if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
       {
@@ -25,12 +31,6 @@ namespace Tetris
       else
       {
           throw new PlatformNotSupportedException();
-      }
-      try {
-      Block.InitializeBlocks();
-      }
-      catch (Exception e) {
-        Console.WriteLine(e.Message);
       }
       Menu menu = new(factory);
       menu.StartScreen();
