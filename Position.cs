@@ -26,7 +26,7 @@ namespace Tetris
 			return this.X == other.X && this.Y == other.Y;
 		}
 
-		public void Löschen()
+		public void Delete()
 		{
 			Console.SetCursorPosition(X, Y);
 			Console.Write(" ");

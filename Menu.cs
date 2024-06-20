@@ -1,19 +1,28 @@
-﻿namespace Tetris
+﻿using Tetris.SoundPlayback;
+
+namespace Tetris
 {
 	public class Menu
 	{
-		private Spiel spiel;
-		private int breite = 10;
-		private int höhe = 20;
-		private int level;
-		private Musik musik;
+    private readonly IAudioPlayer _player;
 
-		public void StartBild()
+		private Game gameInstance;
+		private int width = 10;
+		private int height = 20;
+		private int level;
+		private Music menuMusic;
+
+    public Menu(IPlatformAudioFactory factory)
+    {
+      _player = factory.CreatePlayer();
+    }
+
+		public void StartScreen()
 		{
 			Console.Clear();
 			Console.CursorVisible = false;
-			Abspielen.MusikAn = true;
-			Abspielen.Musik(Musik.Title);
+			_player.TurnOnMusic();
+			_player.PlayMusic(Music.Title);
 			ZeichnenFarbig(ConsoleColor.Magenta, "█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█");
 			ZeichnenFarbig(ConsoleColor.Magenta, "█     ", false);
 			ZeichnenFarbig(ConsoleColor.Yellow, "TETRIS", false);
@@ -22,16 +31,16 @@
 			while (!Console.KeyAvailable)
 			{
 				Console.SetCursorPosition(2, 5);
-				ZeichnenFarbig(ConsoleColor.Yellow, "<Space> drücken");
+				ZeichnenFarbig(ConsoleColor.Yellow, "Press <Space>");
 				Thread.Sleep(500);
 				Console.SetCursorPosition(2, 5);
 				Console.WriteLine("               ");
 				Thread.Sleep(500);
 			}
-			Auswahl();
+			Selection();
 		}
 
-		public void Auswahl()
+		public void Selection()
 		{
 			Console.Clear();
 			Console.ForegroundColor = ConsoleColor.Yellow;
@@ -43,78 +52,78 @@
 					Console.Write("▒");
 				}
 			}
-			ConsoleColor farbe = ConsoleColor.Magenta;
-			ZeichenAnPos(13, 2, "█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█", farbe);
-			ZeichenAnPos(13, 3, "█               █", farbe);
-			ZeichenAnPos(13, 4, "█               █", farbe);
-			ZeichenAnPos(13, 5, "█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█", farbe);
+			ConsoleColor color = ConsoleColor.Magenta;
+			DrawTextAtPosition(13, 2, "█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█", color);
+			DrawTextAtPosition(13, 3, "█               █", color);
+			DrawTextAtPosition(13, 4, "█               █", color);
+			DrawTextAtPosition(13, 5, "█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█", color);
 
-			ZeichenAnPos(18, 1, "Musik", farbe);
-			ZeichenAnPos(15, 3, "A B C D E F G");
+			DrawTextAtPosition(18, 1, "Musik", color);
+			DrawTextAtPosition(15, 3, "A B C D E F G");
 
-			ZeichenAnPos(2, 9, "█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█", farbe);
-			ZeichenAnPos(2, 10, "█                                     █", farbe);
-			ZeichenAnPos(2, 11, "█                                     █", farbe);
-			ZeichenAnPos(2, 12, "█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█", farbe);
+			DrawTextAtPosition(2, 9, "█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█", color);
+			DrawTextAtPosition(2, 10, "█                                     █", color);
+			DrawTextAtPosition(2, 11, "█                                     █", color);
+			DrawTextAtPosition(2, 12, "█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█", color);
 
-			ZeichenAnPos(20, 8, "Level", farbe);
-			ZeichenAnPos(4, 10, "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15");
+			DrawTextAtPosition(20, 8, "Level", color);
+			DrawTextAtPosition(4, 10, "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15");
 
-			MusikAuswahl();
-			LevelAuswahl();
-			Spielen();
+			MusicSelection();
+			LevelSelection();
+			StartGame();
 		}
 
-		private void MusikAuswahl()
+		private void MusicSelection()
 		{
-			Zeiger zMusik = new(new Position(15, 4), true, new int[] { 1, 2, 3, 4, 5, 6, 7 });
-			zMusik.Zeichnen();
+			Pointer MusicSelector = new(new Position(15, 4), true, new int[] { 1, 2, 3, 4, 5, 6, 7 });
+			MusicSelector.Render();
 
-			while (zMusik.Enabled)
+			while (MusicSelector.Enabled)
 			{
-				zMusik.Bewegen(Console.ReadKey(true));
-				zMusik.Zeichnen();
-				musik = (Musik)zMusik.index - 1;
-				Abspielen.MusikAn = false;
+				MusicSelector.Move(Console.ReadKey(true));
+				MusicSelector.Render();
+				menuMusic = (Music)MusicSelector.index - 1;
+				_player.TurnOffMusic();
 				Thread.Sleep(100);
-				Abspielen.MusikAn = true;
-				Abspielen.Musik(musik);
+        _player.TurnOnMusic();
+        _player.PlayMusic(menuMusic);
 			}
 		}
 
-		private void LevelAuswahl()
+		private void LevelSelection()
 		{
 			int[] array = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
-			Zeiger zLevel = new(new Position(4, 11), true, array);
-			zLevel.Zeichnen();
+			Pointer zLevel = new(new Position(4, 11), true, array);
+			zLevel.Render();
 			while (zLevel.Enabled)
 			{
-				zLevel.Bewegen(Console.ReadKey(true));
-				zLevel.Zeichnen();
+				zLevel.Move(Console.ReadKey(true));
+				zLevel.Render();
 			}
 			level = array[zLevel.index - 1];
 		}
 
-		private void Spielen()
+		private void StartGame()
 		{
 			Console.Clear();
-			Abspielen.MusikAn = false;
+			_player.TurnOffMusic();
 			Thread.Sleep(500);
-			spiel = new Spiel(breite, höhe, 170, level, musik);
-			StartBild();
+			gameInstance = new Game(width, height, 170, level, menuMusic, _player);
+			StartScreen();
 		}
 
-		private void ZeichenAnPos(int x, int y, string text, ConsoleColor farbe = ConsoleColor.Yellow)
+		private void DrawTextAtPosition(int x, int y, string text, ConsoleColor color = ConsoleColor.Yellow)
 		{
 			Console.SetCursorPosition(x, y);
-			Console.ForegroundColor = farbe;
+			Console.ForegroundColor = color;
 			Console.Write(text);
 			Console.ForegroundColor = ConsoleColor.White;
 		}
 
-		private void ZeichnenFarbig(ConsoleColor farbe, string text, bool newLine = true)
+		private void ZeichnenFarbig(ConsoleColor color, string text, bool newLine = true)
 		{
-			Console.ForegroundColor = farbe;
+			Console.ForegroundColor = color;
 			if (newLine) Console.WriteLine(text);
 			else Console.Write(text);
 			Console.ForegroundColor = ConsoleColor.White;

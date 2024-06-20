@@ -2,7 +2,6 @@
 
 namespace Tetris
 {
-		// Benutzerdefinierter Konverter für ConsoleColor
 		public class ConsoleColorConverter : JsonConverter
 		{
 			public override bool CanConvert(Type objectType)
