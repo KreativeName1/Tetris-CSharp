@@ -12,9 +12,10 @@ A Tetris clone written in C# Console.
 
 ## Controls
 
-## Missing Features
+## Planned Features
 - Highscore system
 - Pause menu
+- Compatibility with Linux and Mac -> Rewrite of sound/music playback, changing player input method (uses user32.dll)
 
 ## Known Issues
 - The movement is not like the original Tetris game
