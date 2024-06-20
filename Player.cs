@@ -9,12 +9,12 @@ public class Player
     _player = factory.CreatePlayer();
   }
 
-  public async Task PlaySoundAsync(Sound sound)
+  public void PlaySound(Sound sound)
   {
     _player.PlaySound(sound);
   }
 
-  public async Task PlayMusicAsync(Music music)
+  public void PlayMusicAsync(Music music)
   {
       _player.PlayMusic(music);
   }

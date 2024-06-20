@@ -6,7 +6,7 @@ namespace Tetris
 	{
     private readonly IAudioPlayer _player;
 
-		private Game gameInstance;
+		private Game gameInstance = null!;
 		private int width = 10;
 		private int height = 20;
 		private int level;

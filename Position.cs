@@ -17,7 +17,7 @@ namespace Tetris
 			Y = y;
 		}
 
-		public override bool Equals(object obj)
+		public override bool Equals(object? obj)
 		{
 			if (!(obj is Position))
 				return false;
@@ -36,5 +36,10 @@ namespace Tetris
 		{
 			return $"X: {X}, Y: {Y}";
 		}
-	}
+
+    public override int GetHashCode()
+    {
+      return HashCode.Combine(X, Y);
+    }
+  }
 }

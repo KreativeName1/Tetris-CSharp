@@ -98,7 +98,7 @@ namespace Tetris
 			Erase();
 			int rowCount = Pattern.Length;
 			int columnCount = Pattern[0].Length;
-			int[][] oldPattern = Pattern.Clone() as int[][];
+      int[][] oldPattern = Pattern.Clone() as int[][] ?? throw new Exception("Pattern is missing! Please make sure the block has a pattern inside the json file. If Missing, you can find it in the GitHub Repository.");
 
 			int[][] rotatedPattern = new int[columnCount][];
 
@@ -148,7 +148,7 @@ namespace Tetris
 
 		public static List<Block> InitializeBlocks()
 		{
-			List<Block> blockList;
+			List<Block>? blockList;
       if (!File.Exists("blocks.json")) throw new Exception("blocks.json not found! Please make sure the file is in the same directory as the executable. If Missing, you can find it in the GitHub Repository.");
 			blockList = JsonConvert.DeserializeObject<List<Block>>(File.ReadAllText("blocks.json"), new JsonSerializerSettings
 			{
@@ -184,10 +184,14 @@ namespace Tetris
 			return text;
 		}
 
-		// equals
 		public override bool Equals(object? obj)
 		{
 			return obj is Block && obj as Block == this;
 		}
-	}
+
+    public override int GetHashCode()
+    {
+      return base.GetHashCode();
+    }
+  }
 }
