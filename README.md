@@ -11,6 +11,7 @@ A Tetris clone written in C# Console.
 - Music and Level selection in the start menu
 
 ## Controls
+Add Controls here
 
 ## Planned Features
 - Highscore system
